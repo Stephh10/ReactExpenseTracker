@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f9f9f9;
+}
+
+.app {
+  border: 1px solid red;
+  width: 400px;
+  margin: 50px auto 0 auto;
+  padding: 10px;
+}
+
+.balanceWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.balanceItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 23px;
+  padding: 10px 35px;
+  border: 1px solid black;
+}
+
+.history {
+  margin-top: 20px;
+}
+
+.item {
+  display: flex;
+  margin: 10px 0;
+  padding: 15px 5px;
+  background-color: white;
+  border: 1px solid;
+}
+
+.income {
+  border-right: 5px solid green;
+}
