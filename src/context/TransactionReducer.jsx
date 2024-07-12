@@ -11,5 +11,9 @@ export const TransactionReducer = (state, action) => {
 
     return { ...state, transactions: newState };
   }
+
+  if (action.type === "LOAD_DATA") {
+    return { ...state, transactions: action.payload };
+  }
   return state;
 };

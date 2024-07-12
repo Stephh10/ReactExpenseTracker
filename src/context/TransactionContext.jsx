@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 import { TransactionReducer } from "./TransactionReducer";
 
 export const TransactionContext = createContext({
@@ -7,15 +7,35 @@ export const TransactionContext = createContext({
   removeTransaction: () => {},
 });
 
+const localDataItem = JSON.parse(localStorage.getItem("storedTr"));
+
 export function TransactionContextProvider({ children }) {
-  const [state, dispatch] = useReducer(TransactionReducer, {
-    transactions: [{ name: "mangoo", amount: 22, id: 1 }],
-  });
+  const [state, dispatch] = useReducer(
+    TransactionReducer,
+    localDataItem
+      ? { transactions: localDataItem }
+      : {
+          transactions: [],
+        }
+  );
+
+  useEffect(() => {
+    const localData = JSON.parse(localStorage.getItem("storedTr"));
+    dispatch({
+      type: "LOAD_DATA",
+      payload: localData,
+    });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("storedTr", JSON.stringify(state.transactions));
+  }, [state]);
 
   function addTransaction(newItem) {
+    let newItemDetails = { ...newItem, id: Math.random() * 1000 };
     dispatch({
       type: "ADD_TRANSACTION",
-      payload: { ...newItem, id: Math.random() * 1000 },
+      payload: newItemDetails,
     });
   }
 
